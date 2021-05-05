@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   invalidCredentials: boolean = false;
 
   loginForm = this.fb.group({
-    email : ["", [Validators.required, Validators.email]],
+    email : ["", [Validators.required]],
     password: ["", Validators.required]
   })
 
