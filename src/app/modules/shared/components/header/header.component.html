@@ -1,0 +1,79 @@
+<header class="container">
+  <div class="row">
+    <a routerLink="/" class="logo col-lg-3 mt-3 mb-3">
+      <img src="/assets/images/logo.jpg" alt="logo" title="PK Apparel Home">
+    </a>
+    <!-- <ul class="whatsapp-inquiry">
+      <li>Whatsapp for inquiries</li>
+      <li><a href="https://wa.me/923000911000">+923 000-911-000</a></li>
+    </ul> -->
+    <ul class="topbar-links col-lg-9 text-right mt-4">
+      <li><a routerLink="/login" *ngIf="!isLoggedIn"> Sign in </a> </li>
+      <li><a routerLink="/signup" *ngIf="!isLoggedIn"> Register </a></li>
+      <li class="username-link" *ngIf="isLoggedIn">
+        <a routerLink="/acc-info">
+          <i class="fa fa-caret-down"></i>dropdown
+        </a>
+        <ul class="profile-dropdown">
+          <li><a routerLink="/orders">Orders</a></li>
+          <li><a routerLink="/acc-info">Account settings</a></li>
+          <li><a (click)="userLogout()">Logout</a></li>
+        </ul>
+      </li>
+      <li class="link-cart" *ngIf="isLoggedIn">
+        <a routerLink="/cart">
+          <i class="fa fa-cart-arrow-down"></i> Cart (<span class="total-cart" style="color: red">{{cartItems.length}}</span>)
+        </a>
+        <div class="cart-hover" *ngFor="let cartItem of cartItems[0]">
+          <div class="outer-wrap">
+            <div class='cart-wrap'>
+              <div class='img-area'>
+                <img src="" alt='product image'>
+              </div>
+              <div class='cart-details'>
+                <div class="sizes-wrap">
+                  <span class="text">Sizes:</span>
+                  <ul class='sizes-list'>
+                    <li *ngFor="let size of cartItem.sizes">{{size}}</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="sizes-wrap">
+                <span class="text">Qty:</span>
+                <ul class='sizes-list'>
+                  <li *ngFor="let qty of cartItem.quantity">{{qty}}</li>
+                </ul>
+              </div>
+            </div>
+            <div class='qty-amount'>
+              <span class='qty'></span> X
+              <span class='unit-amount'></span>
+              <a routerLink="/edit-cart" class='btn-edit'>Edit</a>
+              <a routerLink='#' class='btn-remove'>Remove</a>
+            </div>
+          </div>
+          <div class="cart-outer">
+            <div class="amount-wrap clearfix">
+              <a routerLink="#" class="empty-cart">Empty Cart</a>
+              <strong>Total Amount: <span class="total-amount">0</span></strong>
+            </div>
+            <ul class="hover-links clearfix">
+              <li><a routerLink="/cart">View Cart</a></li>
+              <li class="btn-5"><a routerLink="/checkout">Checkout</a></li>
+            </ul>
+          </div>
+          <h3 class='no-item-cart'>No Item in cart</h3>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <nav class="main-menu mb-4">
+    <ul>
+      <li><a routerLink="/shop">Wholesale Shop</a></li>
+      <li><a routerLink="/about">About us</a></li>
+      <li><a routerLink="/factory">Factory</a></li>
+      <li><a routerLink="/blog">Blog</a></li>
+      <li><a routerLink="/contact">Contact us</a></li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,3 @@
+
+export const MEN_PANT_SIZES = [28,30,32,34,36,38,40,42,44,46]
+export const WOMEN_PANT_SIZES = [26,28,30,32,34,36,38,40]
