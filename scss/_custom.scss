@@ -792,41 +792,24 @@ footer p {
   border-bottom: 2px solid #ccc;
   text-align: center;
 }
-.men-product-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0 30px;
-}
-.men-product-list li {
-  width: 25%;
-}
 .men-product-list li img {
   display: block;
   width: 100%;
 }
-.inner-manufacture {
+.product-link {
   display: block;
   -webkit-box-shadow: 0 0 5px 0.5px #C2C2C2;
-  box-shadow: 0 0 5px 0.5px #C2C2C2;
-  margin-right: 20px;
+  box-shadow: 0 0 5px 0.2px #C2C2C2;
 }
-.inner-manufacture .product-category {
+.product-link:hover {
+  text-decoration: none;
+  box-shadow: 0 0 5px 0.5px #C2C2C2;
+}
+.product-link .product-category {
   display: block;
   text-align: center;
   padding: 10px 0;
   border-top: 1px solid #ccc;
-}
-.rating-wrap-outer {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.rating-wrap-outer > li {
-  width: 25%;
-  margin: 0 0 30px;
 }
 .star-rating li {
   float: left;
@@ -844,7 +827,7 @@ footer p {
   width: 100%;
   overflow: hidden;
 }
-.inner-rating.inner-manufacture {
+.inner-rating.product-link {
   padding: 20px;
   position: relative;
   min-height: 250px;
@@ -856,14 +839,14 @@ footer p {
 .landing-heading {
   margin: 0 0 40px;
   position: relative;
-  height: 300px;
+  min-height: 300px;
 }
 .landing-heading img {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
-  height: 300px;
+  min-height: 300px;
   z-index: -1;
 }
 .landing-heading .text-area {
@@ -939,29 +922,24 @@ footer p {
   margin-left: auto;
   margin-right: auto;
 }
-
 .swiper-slide {
   background-size: cover;
   background-position: center;
 }
-
 .gallery-top {
   height: 80%;
   width: 100%;
 }
-
 .gallery-thumbs {
   height: 20%;
   box-sizing: border-box;
   padding: 10px 0;
 }
-
 .gallery-thumbs .swiper-slide {
   width: 25%;
   height: 100%;
   opacity: 0.4;
 }
-
 .gallery-thumbs .swiper-slide-thumb-active {
   opacity: 1;
 }
@@ -975,7 +953,6 @@ footer p {
   align-items: flex-start;
   width: 80%;
 }
-
 @media screen and (max-width: 1023px){
 	.main {padding: 0 10px 20px;}
 	.products .boxes{width: 103%;}
@@ -1205,8 +1182,5 @@ footer p {
   .men-product-list li, .rating-wrap-outer > li {
     width: 100%;
     margin-bottom: 25px;
-  }
-  .inner-manufacture {
-    margin-right: 0;
   }
 }

@@ -1,0 +1,27 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <app-filter-sidebar></app-filter-sidebar>
+    </div>
+    <div class="product-list col-lg-9">
+      <div class="row">
+        <div class="product-item col-lg-3" *ngFor="let product of getAllProducts">
+          <a class="d-block" routerLink="/shop/{{currentDept}}/{{currentCategory}}/{{product._id}}">
+            <img src="/uploads/{{product.styleNo}}/front.jpeg" alt="{{product.title}}" height="350" />
+          </a>
+          <h2>
+            <a routerLink="/shop/{{currentDept}}/{{currentCategory}}/{{product._id}}">{{product.title}}</a>
+          </h2>
+          <ul class="sizes-list">
+            <li *ngFor="let size of product.sizes">{{size}}</li>
+          </ul>
+          <div class="price-section">
+            Price = <span class="price">{{product.prices[0].regularPrice}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>
