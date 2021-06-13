@@ -28,9 +28,11 @@ export class AuthService {
     }
   }
 
-  userLogout = async() => {
-    const token = localStorage.getItem('token');
-    const res = await this.http.post(`${endpoints.USER_LOGOUT}`, token).toPromise() as IGeneralResponse;
-    res.type === 'success'? true : false;
+  userLogout() {
+    // const token = localStorage.getItem('token');
+    // const res = await this.http.post(`${endpoints.USER_LOGOUT}`, token).toPromise() as IGeneralResponse;
+    // res.type === 'success'? true : false;
+    localStorage.removeItem('isLoggedIn');
+    return true;
   }
 }

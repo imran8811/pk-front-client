@@ -14,8 +14,8 @@ export class ProductService {
     return response;
   }
 
-  getProductByID = async (id:string | null) => {
-    const response = await this.http.get(`${endpoints.GET_PRODUCT}/${id}`).toPromise() as IProduct;
+  getProductByID = async (styleNo:string | null) => {
+    const response = await this.http.get(`${endpoints.GET_PRODUCT}/${styleNo}`).toPromise() as IProduct;
     return response;
   }
 

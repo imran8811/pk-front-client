@@ -1,12 +1,11 @@
 <app-header></app-header>
-<form [formGroup]="orderForm" *ngFor="let details of productDetails">
-<div class="container">
+<div class="container" *ngFor="let details of productDetails">
   <div class="row">
     <nav class="col-lg-12" aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-        <li class="breadcrumb-item text-capitalize"><a routerLink="/shop/{{details.department==='Men'? 'men' : ''}}">{{details.department}}</a></li>
-        <li class="breadcrumb-item" aria-current="page"><a routerLink="/shop/{{details.department==='Men'? 'men' : ''}}/{{details.category==='jeansPant'? 'jeans-pant' : ''}}">{{details.category==='jeansPant'? 'Jeans Pants' : ''}}</a></li>
+        <li class="breadcrumb-item text-capitalize"><a routerLink="/{{currentDept}}">{{details.department}}</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a routerLink="/{{currentDept}}/{{currentCategory}}">{{currentCategoryUser}}</a></li>
         <li class="breadcrumb-item active">{{details.styleNo}}</li>
       </ol>
     </nav>
@@ -15,9 +14,9 @@
         <div class="gallery-area col-lg-6">
           <div class="swiper-container gallery-top">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" style="background-image:url(/uploads/{{details.styleNo}}/front.jpg)"></div>
-              <div class="swiper-slide" style="background-image:url(/uploads/{{details.styleNo}}/back.jpg)"></div>
-              <div class="swiper-slide" style="background-image:url(/uploads/{{details.styleNo}}/size-chart.jpg)"></div>
+              <div class="swiper-slide" style="background-image:url({{SERVER_BASE_PATH}}/{{details.styleNo}}/front.jpg)"></div>
+              <div class="swiper-slide" style="background-image:url({{SERVER_BASE_PATH}}/{{details.styleNo}}/back.jpg)"></div>
+              <div class="swiper-slide" style="background-image:url({{SERVER_BASE_PATH}}/{{details.styleNo}}/size-chart.jpg)"></div>
             </div>
             <!-- Add Arrows -->
             <div class="swiper-button-next swiper-button-white"></div>
@@ -25,107 +24,85 @@
           </div>
           <div class="swiper-container gallery-thumbs">
             <div class="swiper-wrapper">
-              <div class="swiper-slide" style="background-image:url(/uploads/{{details.styleNo}}/front.jpg)"></div>
-              <div class="swiper-slide" style="background-image:url(/uploads/{{details.styleNo}}/back.jpg)"></div>
-              <div class="swiper-slide" style="background-image:url(/uploads/{{details.styleNo}}/size-chart.jpg)"></div>
+              <div class="swiper-slide" style="background-image:url({{SERVER_BASE_PATH}}/{{details.styleNo}}/front.jpg)"></div>
+              <div class="swiper-slide" style="background-image:url({{SERVER_BASE_PATH}}/{{details.styleNo}}/back.jpg)"></div>
+              <div class="swiper-slide" style="background-image:url({{SERVER_BASE_PATH}}/{{details.styleNo}}/size-chart.jpg)"></div>
             </div>
           </div>
         </div>
         <div class="details-area col-lg-6">
           <div class="row">
-            <div class="col-lg-6">
-              <span>Style# {{details.styleNo}}</span>
-            </div>
-            <div class="col-lg-6 text-right">
-              <span>Color: {{details.color}}</span>
+            <div class="col-lg-12">
+              <p><span>Style# {{details.styleNo}}</span></p>
+              <p><span>Color: {{details.color}}</span></p>
+              <p>
+                <strong>Fabric: </strong>
+                <span>{{details.fabricDetails.stretchbility}} </span>
+                <span>{{details.fabricDetails.type}} </span>
+                <span>{{details.fabricDetails.content}} </span>
+              </p>
+              <p>
+                <strong>Washes: </strong>
+                <span *ngIf="details.washDetails.stoneWash">Stone Wash</span>
+                <span *ngIf="details.washDetails.whiskers">Whiskers</span>
+                <span *ngIf="details.washDetails.faded">Faded</span>
+                <span *ngIf="details.washDetails.wrinkles">Wrinkles</span>
+              </p>
+              <p>
+                <strong>Sizes: </strong>
+                <span *ngFor="let size of details.sizes">{{size}}-</span>
+              </p>
+              <p>
+                <strong>Quantity: </strong>
+                <span class="mb-3" *ngFor="let quantity of details.quantity">{{quantity}}-</span>
+              </p>
             </div>
             <hr class="col-lg-12 mb-2" />
             <div class="col-lg-12">
               <div class="row">
                 <div class="col-lg-6">
-                  <h4>Fabric</h4>
-                  <ul>
-                    <li>Type - {{details.fabricDetails.stretchbility}} - {{details.fabricDetails.type}}</li>
-                    <li>Content - {{details.fabricDetails.content}}</li>
-                  </ul>
-                </div>
-                <div class="col-lg-6">
-                  <h4>Wash</h4>
-                  <ul>
-                    <li *ngIf="details.washDetails.stoneWash">Stone Wash</li>
-                    <li *ngIf="details.washDetails.whiskers">Whiskers</li>
-                    <li *ngIf="details.washDetails.faded">Faded</li>
-                    <li *ngIf="details.washDetails.wrinkles">Wrinkles</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <hr class="col-lg-12 mb-2" />
-            <!-- <div class="col-lg-12">
-              <div class="row">
-                <div class="col-lg-4">
-                  <h4>Order Type</h4>
-                  <label for="sample-order">
-                    <input type="radio" id="sample-order" [(ngModel)]="orderType" value="sampleOrder" name="orderType" formControlName="orderType"> Sample
-                  </label>
-                  <label for="regular-order">
-                    <input type="radio" id="regular-order" [(ngModel)]="orderType" value="regularOrder" name="orderType" formControlName="orderType"> Order
-                  </label>
-                </div>
-                <div class="col-lg-4">
-                  <div formArrayName="sizes">
-                    <h4>Waist Size</h4>
-                    <div *ngIf="orderType === 'regularOrder'">
-                      <select class="form-control mb-3" *ngFor="let size of sizes.controls; let i=index" [formControlName]="i">
-                        <option *ngFor="let menSize of MEN_PANT_SIZES">{{menSize}}</option>
-                      </select>
-                    </div>
-                    <div *ngIf="orderType === 'sampleOrder'">
-                      <p>Available size</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-4">
-                  <div formArrayName="quantity">
-                    <h4>Quantity</h4>
-                    <div *ngIf="orderType === 'regularOrder'">
-                      <div class="mb-3" *ngFor="let quantity of quantity.controls; let i=index">
-                        <input type="text" class="mb-3 form-control" [formControlName]="i">
+                  <button type="button" (click)="checkSession()" class="btn btn-primary">Order Now</button>
+                  <app-modal #modal>
+                    <div class="col-lg-12 app-modal-header">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <!-- <h5 class="modal-title">Order Now</h5> -->
+                        </div>
+                        <div class="col-lg-6">
+                          <button type="button" class="close" (click)="modal.hide()">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
-                    <div *ngIf="orderType === 'sampleOrder'">
-                      <p>1 Piece</p>
+                    <div class="col-lg-12 app-modal-body">
+                      <form [formGroup]="OrderForm">
+                        <div class="mb-3">
+                          <label for="order-quantity">Quantity (set)</label>
+                          <select formControlName="orderQuantity" id="order-quantity" class="form-control">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </div>
+                        <div class="mb-3">
+                          <label for="shipping-address">Shipping Address</label>
+                          <textarea rows="4" id="shipping-address" class="form-control" formControlName="shippingAddress"></textarea>
+                        </div>
+                        <div class="mb-3">
+                          <label for="whatsapp">Whatsapp No. <small>(for shipping rates approval)</small></label>
+                          <input type="text" id="whatsapp" class="form-control" formControlName="whatsappNo">
+                        </div>
+                      </form>
                     </div>
-                  </div>
-                </div>
-                <div class="col-lg-12 text-right" *ngIf="orderType === 'regularOrder'">
-                  <button type="button" class="btn btn-link" (click)='addSizesQuantity()'>Add size</button>
-                </div>
-              </div>
-            </div> -->
-            <!-- <hr class="col-lg-12 mb-2" />
-            <div class="col-lg-12">
-              <div class="row">
-                <div class="col-lg-6">
-                  <p>Price - {{details.prices[0].regularPrice}}</p>
-                </div>
-                <div class="col-lg-6 text-right">
-                  <button type="button" class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+                    <div class="app-modal-footer">
+                      <button type="button" (click)="OrderNow()" class="btn btn-primary">Order now</button>
+                    </div>
+                  </app-modal>
                 </div>
               </div>
-            </div> -->
-            <div class="col-lg-12">
-              <div class="row">
-                <div class="col-lg-6">
-                  <button type="button" class="btn btn-success">Order Sample</button>
-                </div>
-                <div class="col-lg-6">
-                  <button type="button" class="btn btn-primary">Place Order</button>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-12">
-
             </div>
           </div>
         </div>
@@ -133,7 +110,6 @@
     </div>
   </div>
 </div>
-</form>
 <div id="reviews" style="display: none;">
   <ul class="review-list">
     <li>

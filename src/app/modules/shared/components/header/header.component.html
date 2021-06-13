@@ -1,5 +1,5 @@
 <header class="container">
-  <div class="row">
+  <div class="row header-holder">
     <a routerLink="/" class="logo col-lg-3 mt-3 mb-3">
       <img src="/assets/images/logo.jpg" alt="logo" title="PK Apparel Home">
     </a>
@@ -17,14 +17,14 @@
         <ul class="profile-dropdown">
           <li><a routerLink="/orders">Orders</a></li>
           <li><a routerLink="/acc-info">Account settings</a></li>
-          <li><a (click)="userLogout()">Logout</a></li>
+          <li><a routerLink="/" (click)="userLogout()">Logout</a></li>
         </ul>
       </li>
       <li class="link-cart" *ngIf="isLoggedIn">
-        <a routerLink="/cart">
+        <!-- <a routerLink="/cart">
           <i class="fa fa-cart-arrow-down"></i> Cart (<span class="total-cart" style="color: red">{{cartItems.length}}</span>)
-        </a>
-        <div class="cart-hover" *ngFor="let cartItem of cartItems[0]">
+        </a> -->
+        <!-- <div class="cart-hover" *ngFor="let cartItem of cartItems[0]">
           <div class="outer-wrap">
             <div class='cart-wrap'>
               <div class='img-area'>
@@ -63,13 +63,20 @@
             </ul>
           </div>
           <h3 class='no-item-cart'>No Item in cart</h3>
-        </div>
+        </div> -->
       </li>
     </ul>
   </div>
   <nav class="main-menu mb-4">
     <ul>
-      <li><a routerLink="/shop">Wholesale Shop</a></li>
+      <li>
+        <a href="#">Men Jeans <i class="fa fa-arrow-down"></i></a>
+        <ul class="dropdown">
+          <li><a routerLink="/men/jeans-pants">Jeans Pants</a></li>
+          <li><a routerLink="/men/jeans-shirts">Jeans Shirts</a></li>
+        </ul>
+      </li>
+      <li><a href="#">Women Jeans</a></li>
       <li><a routerLink="/about">About us</a></li>
       <li><a routerLink="/factory">Factory</a></li>
       <li><a routerLink="/blog">Blog</a></li>

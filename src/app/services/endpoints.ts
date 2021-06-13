@@ -16,5 +16,8 @@ export class endpoints {
   static ADD_TO_CART = endpoints.baseAddress + '/cart/add';
   static GET_CART_ITEMS = endpoints.baseAddress + '/cart/get/all'
 
+  //order
+  static ADD_NEW_ORDER = endpoints.baseAddress + '/order/add'
+
 
 }

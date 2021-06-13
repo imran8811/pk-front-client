@@ -1,33 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormArrayName, FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 
-import { IProduct, IGeneralResponse } from 'src/app/models';
-import { ProductService } from '../../../../services/product.service'
-import { MEN_PANT_SIZES } from '../../../../constants';
-import { AuthService } from 'src/app/services/auth.service';
-import { makeWordURLFriendly } from '../../../../utilities';
-import { endpoints } from '../../../../services/endpoints'
-import { appRoutes } from '../../../../services/app-routes'
+import { IProduct, IGeneralResponse, INewOrder } from 'src/app/models';
+import { ProductService } from 'src/app/services/product.service'
+import { MEN_PANT_SIZES, URL_SYNTAX, USER_SYNTAX } from 'src/app/constants';
+import { endpoints } from 'src/app/services/endpoints';
+import { appRoutes } from 'src/app/services/app-routes';
 import { NotifierService, NotifierOptions } from 'angular-notifier';
+import { ModalComponent } from 'src/app/modules/shared/components/modal/modal.component';
+import { OrderService, AuthService } from 'src/app/services';
 
 @Component({
   selector: 'men-details',
   templateUrl: './men-details.component.html',
 })
 
-export class ShopDetailsComponent implements OnInit {
-  orderForm: FormGroup;
+export class MenDetailsComponent implements OnInit {
+  OrderForm: FormGroup;
+  @ViewChild(ModalComponent) modal;
+  currentDept:string = URL_SYNTAX.MEN;
+  currentCategory:string = URL_SYNTAX.JEANS_PANTS;
+  currentCategoryUser:string = USER_SYNTAX.JEANS_PANTS;
   private readonly notifier: NotifierService;
-
   readonly MEN_PANT_SIZES = MEN_PANT_SIZES;
-
   productDetails:any = [];
-  productId:string | null = '';
+  productStyle:string | null = '';
   orderType = 'regularOrder';
   styleNo:string = '';
+  SERVER_BASE_PATH = appRoutes.SERVER_BASE_PATH;
 
-  get form() { return this.orderForm.controls }
+  get form() { return this.OrderForm.controls }
 
   constructor(
     private productService: ProductService,
@@ -35,58 +38,46 @@ export class ShopDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private authservice: AuthService,
     private router : Router,
-    notifierService: NotifierService
-    ) {
-      this.notifier = notifierService
-    }
+    notifierService: NotifierService,
+    private orderservice: OrderService
+  ) {
+    this.notifier = notifierService
+  }
 
   ngOnInit() {
-    this.productId = this.route.snapshot.paramMap.get('id');
+    this.productStyle = this.route.snapshot.paramMap.get('styleNo');
+
     this.getDetails();
-    this.orderForm = this.fb.group({
-      orderType : ['regularOrder', Validators.required],
-      sizes : this.fb.array([
-        this.fb.control('')
-      ]),
-      quantity : this.fb.array([
-        this.fb.control('', Validators.required)
-      ])
+
+    this.OrderForm = this.fb.group({
+      orderQuantity : ['1', Validators.required],
+      shippingAddress: ['', Validators.required],
+      whatsappNo: ['']
     })
   }
 
-  addSizesQuantity(){
-    this.sizes.push(this.fb.control(''));
-    this.quantity.push(this.fb.control(''));
-  }
-
-  get sizes() { return this.orderForm.get('sizes') as FormArray }
-  get quantity() { return this.orderForm.get('quantity') as FormArray }
-
   getDetails = async () => {
-    const res = await this.productService.getProductByID(this.productId) as IProduct;
+    const res = await this.productService.getProductByID(this.productStyle) as IProduct;
     this.productDetails.push(res);
     this.styleNo = res.styleNo;
   }
 
-  addToCart = async() =>{
+  checkSession = async () => {
+    const urlParams = this.route.snapshot.params;
+    const nextPath = `${urlParams.dept}/${urlParams.category}/${urlParams.styleNo}`;
     const isLoggedIn = this.authservice.isLoggedIn();
-    if(isLoggedIn) {
-      const data  = {
-        productId : this.productId,
-        styleNo : this.styleNo,
-        orderType : this.orderType,
-        sizes : this.form.sizes.value,
-        quantity : this.form.quantity.value
-      }
-      const res = await this.productService.addToCart(data) as IGeneralResponse;
-      if(res.type === 'success') {
-        localStorage.setItem('CART_ITEM', 'true');
-        this.notifier.notify('success', 'Item added to cart');
-      }
+    if(isLoggedIn){
+      this.modal.show();
     } else {
-      localStorage.setItem('NEXT_PATH', `${appRoutes.WHOLESALE_SHOP}/${makeWordURLFriendly(this.productDetails[0].department)}/${makeWordURLFriendly(this.productDetails[0].category)}/${this.productId}`);
-      this.router.navigate([appRoutes.USER_LOGIN]);
+      localStorage.setItem("NEXT_PATH", nextPath);
+      this.router.navigate(['/login']);
     }
   }
 
+  OrderNow = async () => {
+    const res = await this.orderservice.createNewOrder(this.OrderForm.value) as INewOrder;
+    if(res.type === 'success'){
+      this.router.navigate(['/order-received']);
+    }
+  }
 }

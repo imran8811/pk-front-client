@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './components/home/home.components';
-import { AboutComponent } from './components/about/about.components';
-import { FactoryComponent } from './components/factory/factory.components';
-import { BlogComponent } from './components/blog/blog.components';
-import { ContactComponent } from './components/contact/contact.components';
-import { LoginComponent } from './components/login/login.components';
-import { SignupComponent } from './components/signup/signup.components';
-import { MenJeansPantsComponent, MenJeansShirtsComponent } from './components/men';
+import {
+  HomeComponent,
+  AboutComponent,
+  FactoryComponent,
+  BlogComponent,
+  ContactComponent,
+  MenListingComponent,
+  MenDetailsComponent,
+  OrderReceivedComponent
+} from './components';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -16,9 +18,9 @@ const routes: Routes = [
   { path: 'factory', component: FactoryComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'men/:category/:id', component: MenJeansPantsComponent }
+  { path: ':dept/:category', component: MenListingComponent },
+  { path: ':dept/:category/:styleNo', component: MenDetailsComponent },
+  { path: 'order-received', component: OrderReceivedComponent }
 ];
 
 @NgModule({
@@ -37,6 +39,7 @@ export const COMPONENTS_LIST = [
   FactoryComponent,
   BlogComponent,
   ContactComponent,
-  LoginComponent,
-  SignupComponent
+  MenListingComponent,
+  MenDetailsComponent,
+  OrderReceivedComponent
 ]

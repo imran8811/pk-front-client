@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
       } else {
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('fullName', response.data.fullName);
-        this.router.navigate([appRoutes.WHOLESALE_SHOP]);
+        this.router.navigate(['/']);
       }
     } else if(response.type === 'error') {
       this.invalidCredentials = true;

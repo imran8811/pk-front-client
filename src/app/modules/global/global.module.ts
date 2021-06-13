@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common'
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common'
 
 import { SharedModule } from '../shared/shared.module';
 import { GlobalRoutingModule } from './global-routing.module';
+import { NotifierModule } from 'angular-notifier';
 
 import { COMPONENTS_LIST } from './global-routing.module';
 
@@ -14,10 +15,11 @@ import { COMPONENTS_LIST } from './global-routing.module';
   ],
   imports: [
     GlobalRoutingModule,
+    CommonModule,
     SharedModule,
     ReactiveFormsModule,
     HttpClientModule,
-    CommonModule
+    NotifierModule
   ]
 })
 export class GlobalModule { }

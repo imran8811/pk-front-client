@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
     const data = this.signUpForm.value;
     const res = await this.authService.userSignup(data) as IUserSignup;
     if(res.type === 'success') {
-      this.router.navigate([appRoutes.WHOLESALE_SHOP]);
+      this.router.navigate(['/']);
     }
   }
 }
