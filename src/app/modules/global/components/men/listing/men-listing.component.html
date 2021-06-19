@@ -1,19 +1,15 @@
 <app-header></app-header>
 <div class="container">
-  <div class="product-list row">
+  <div class="product-list row mb-5">
     <div class="product-item col-lg-3" *ngFor="let product of getAllProducts">
-      <a class="d-block" routerLink="/{{currentDept}}/{{currentCategory}}/{{product.styleNo}}">
+      <a class="d-block mb-3" routerLink="/{{currentDept}}/{{currentCategory}}/{{product.styleNo}}">
         <img src="{{SERVER_BASE_PATH}}/{{product.styleNo}}/front.jpg" alt="{{product.title}}" height="350" />
       </a>
-      <h2>
-        <a routerLink="/{{currentDept}}/{{currentCategory}}/{{product.styleNo}}">{{product.title}}</a>
-      </h2>
-      <!-- <ul class="sizes-list">
+      <h2 class="mb-2"><a routerLink="/{{currentDept}}/{{currentCategory}}/{{product.styleNo}}">{{product.title}}</a></h2>
+      <ul class="sizes-list mb-2">
         <li *ngFor="let size of product.sizes">{{size}}</li>
-      </ul> -->
-      <div class="price-section">
-        Price = <span class="price">{{product.price}}</span>
-      </div>
+      </ul>
+      <div class="price-section">Price = <span class="price">{{product.price}}</span></div>
     </div>
   </div>
 </div>
