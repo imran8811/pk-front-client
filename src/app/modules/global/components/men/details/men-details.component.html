@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container" *ngFor="let details of productDetails">
+<div class="container page-details" *ngFor="let details of productDetails">
   <div class="row">
     <nav class="col-lg-12" aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -32,41 +32,46 @@
         </div>
         <div class="details-area col-lg-6">
           <div class="row">
-            <div class="col-lg-12">
-              <p><strong>Style# </strong>{{details.styleNo}}</p>
-              <p><strong>Color: </strong>{{details.color}}</p>
-              <p>
+            <ul class="col-lg-12">
+              <li>
+                <strong>Style# </strong>
+                <span>{{details.styleNo}}</span>
+              </li>
+              <li>
+                <strong>Color: </strong>
+                <span>{{details.color}}</span>
+              </li>
+              <li>
                 <strong>Fabric: </strong>
-                <span>{{details.fabricDetails.stretchbility}} </span>
-                <span>{{details.fabricDetails.type}} </span>
-                <span>{{details.fabricDetails.content}} </span>
-              </p>
-              <p>
+                <span>{{details.fabricDetails.stretchbility}} {{details.fabricDetails.type}} {{details.fabricDetails.content}} </span>
+              </li>
+              <li>
                 <strong>Washes: </strong>
-                <span *ngIf="details.washDetails.stoneWash">Stone Wash</span>
-                <span *ngIf="details.washDetails.whiskers">Whiskers</span>
-                <span *ngIf="details.washDetails.faded">Faded</span>
-                <span *ngIf="details.washDetails.wrinkles">Wrinkles</span>
-              </p>
-              <p>
+                <span>{{details.washDetails.stoneWash}}, {{details.washDetails.whiskers}}, {{details.washDetails.faded}}, {{details.washDetails.wrinkles}}</span>
+              </li>
+              <li>
                 <strong>Sizes: </strong>
-                <span *ngFor="let size of details.sizes">{{size}}-</span>
-              </p>
-              <p>
+                <span><i *ngFor="let size of details.sizes">{{size}}-</i></span>
+              </li>
+              <li>
                 <strong>Quantity: </strong>
-                <span class="mb-3" *ngFor="let quantity of details.quantity">{{quantity}}-</span>
-              </p>
-            </div>
+                <span class="mb-3"><i *ngFor="let quantity of details.quantity">{{quantity}}-</i></span>
+              </li>
+              <li>
+                <strong>Delivery: </strong>
+                <span class="mb-3">30 days</span>
+              </li>
+            </ul>
             <hr class="col-lg-12 mb-2" />
             <div class="col-lg-12">
               <div class="row">
                 <div class="col-lg-6">
-                  <button type="button" (click)="checkSession()" class="btn btn-primary">Order Now</button>
-                  <app-modal #modal>
+                  <a [routerLink]="['/create-order']" [queryParams]="{style: details.styleNo}" class="btn btn-primary">Order Now</a>
+                  <!-- <app-modal #modal>
                     <div class="col-lg-12 app-modal-header">
                       <div class="row">
                         <div class="col-lg-6">
-                          <!-- <h5 class="modal-title">Order Now</h5> -->
+                          <h5 class="modal-title">Order Now</h5>
                         </div>
                         <div class="col-lg-6">
                           <button type="button" class="close" (click)="modal.hide()">
@@ -100,7 +105,7 @@
                     <div class="app-modal-footer">
                       <button type="button" (click)="OrderNow()" class="btn btn-primary">Order now</button>
                     </div>
-                  </app-modal>
+                  </app-modal> -->
                 </div>
               </div>
             </div>

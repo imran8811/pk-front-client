@@ -53,10 +53,6 @@ input[type=text], input[type=password] {
   padding: 0 10px;
 }
 input:focus {box-shadow: 0 0 4px rgba(0, 122, 255, 0.2);}
-.input-wrap {
-  margin: 0 0 20px;
-  position: relative;
-}
 .hidden {display: none;}
 ul {list-style:none;}
 .wrapper {
@@ -105,7 +101,7 @@ header .logo img {
 	margin: 0 0 0 20px;
 	text-transform:capitalize;
 }
-.main-menu ul li:hover a{text-decoration:none;}
+.main-menu ul li:hover a { text-decoration:none; }
 .main-menu ul li:first-child {
 	background: none;
 	margin: 0;
@@ -125,7 +121,7 @@ header .logo img {
 	overflow:hidden;
 	margin:0 0 30px;
 }
-.features .boxes {overflow:hidden;}
+.features .boxes { overflow:hidden; }
 .features .boxes .box {
 	padding:20px;
 	float:left;
@@ -422,23 +418,10 @@ header .logo img {
 	background:#08f;
 	text-decoration:none;
 }
-.page-details {
-	overflow: hidden;
-	padding: 30px 0 0;
-	margin: 0 0 100px;
-}
-.page-details .image-area {
-	float: left;
-	width: 40%;
-}
 .page-details .image-area img {
 	display: block;
 	width: 100%;
 	height: auto;
-}
-.page-details .details-area {
-	float: right;
-	width: 50%;
 }
 .page-details .details-area > strong{
 	display: block;
@@ -460,39 +443,6 @@ header .logo img {
 .page-details ul li span {
 	float: left;
 	width: 50%;
-}
-.page-details .your-inquiry {
-	display: block;
-	width: 180px;
-	padding: 10px 10px;
-	color: #fff;
-	background: #09f;
-	text-align: center;
-	border-radius: 5px;
-	margin: 0 0 30px;
-}
-.page-details .your-inquiry:hover, .page-details .btn-back:hover {
-	text-decoration: none;
-}
-.page-details .btn-back-wrap {overflow: hidden;}
-.page-details .btn-back {
-	float: right;
-	width: 100px;
-	color: #fff;
-	background: #333;
-	padding: 10px 10px 10px 30px;
-	text-align: center;
-	border-radius: 5px;
-	position: relative;
-}
-.page-details .btn-back:after {
-	content: "";
-	position: absolute;
-	background: url("../images/arrow-back.png") no-repeat;
-	left: 14px;
-	top: 14px;
-	width: 20px;
-	height: 14px;
 }
 .page-inquiry #content {
 	width: 100%;
@@ -680,27 +630,28 @@ footer .holder {
 	text-align: center;
 	color: #fff;
 }
-.footerNav ul {
-	margin-bottom: 30px;
-	color: #fff;
-}
-.footerNav ul li {
-	background: url(../images/separator.png) no-repeat 0 50%;
-	vertical-align: middle;
-	display: inline-block;
-	padding: 0 0 0 20px;
-	margin:0 0 0 20px;
-	font-size:15px;
-	line-height:20px;
-}
-.footerNav ul li a {color:#fff;}
-.footerNav ul li:first-child {
-	background: none;
-	padding:0;
-	margin:0;
-}
+// .footerNav ul {
+// 	margin-bottom: 30px;
+// 	color: #fff;
+// }
+// .footerNav ul li {
+// 	background: url(../images/separator.png) no-repeat 0 50%;
+// 	vertical-align: middle;
+// 	display: inline-block;
+// 	padding: 0 0 0 20px;
+// 	margin:0 0 0 20px;
+// 	font-size:15px;
+// 	line-height:20px;
+// }
+// .footerNav ul li a {color:#fff;}
+// .footerNav ul li:first-child {
+// 	background: none;
+// 	padding:0;
+// 	margin:0;
+// }
 footer p {
-	margin: 0;
+	margin: 0 0 20px;
+  color: #fff;
 }
 /* payment module */
 .big-gap {
@@ -955,7 +906,6 @@ footer p {
 .modal {
   background: rgba(0,0,0,0.6);
 }
-
 @media screen and (max-width: 1023px){
 	.main {padding: 0 10px 20px;}
 	.products .boxes{width: 103%;}
@@ -965,10 +915,10 @@ footer p {
   .head-contact {
     padding: 0 20px;
   }
-	.footerNav ul li {
-		margin: 0 0 0 15px;
-		padding: 0 0 0 15px;
-	}
+	// .footerNav ul li {
+	// 	margin: 0 0 0 15px;
+	// 	padding: 0 0 0 15px;
+	// }
 	.contact-wrap ul li span:first-child {
 		color: blue;
 		margin: 0 0 5px;
@@ -988,7 +938,6 @@ footer p {
 		padding: 0;
 	}
 	header .logo img {
-		/*margin: 0 auto;*/
 		width: 60%;
 	}
 	.social-network, .whatsapp-inquiry {
@@ -1157,7 +1106,7 @@ footer p {
 		display: block;
 		width: 100%;
 	}
-	.footerNav {display: none;}
+	// .footerNav {display: none;}
 	footer p {font-size: 12px;}
 	/* payment CSS */
 	.confirm-payment .input-wrap {

@@ -9,7 +9,8 @@ import {
   ContactComponent,
   MenListingComponent,
   MenDetailsComponent,
-  OrderReceivedComponent
+  OrderReceivedComponent,
+  CreateOrderComponent
 } from './components';
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: ':dept/:category', component: MenListingComponent },
   { path: ':dept/:category/:styleNo', component: MenDetailsComponent },
-  { path: 'order-received', component: OrderReceivedComponent }
+  { path: 'order-received', component: OrderReceivedComponent },
+  { path: 'create-order', component: CreateOrderComponent }
 ];
 
 @NgModule({
@@ -41,5 +43,6 @@ export const COMPONENTS_LIST = [
   ContactComponent,
   MenListingComponent,
   MenDetailsComponent,
-  OrderReceivedComponent
+  OrderReceivedComponent,
+  CreateOrderComponent
 ]

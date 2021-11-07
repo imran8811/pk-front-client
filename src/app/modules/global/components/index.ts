@@ -6,3 +6,4 @@ export * from './home/home.components';
 export * from './men/listing/men-listing.components';
 export * from './men/details/men-details.components';
 export * from './order-received/order-received.components';
+export * from './create-order/create-order.components';
